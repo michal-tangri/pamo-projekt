@@ -1,18 +1,11 @@
 import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { HomeScreen } from './components/homeScreen.component';
-import { HealthScreen } from './components/healthScreen.component';
-
-const Stack = createNativeStackNavigator();
+import { Navigation } from './components/navigation.component';
 
 function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Health" component={HealthScreen} />
-      </Stack.Navigator>
+      <Navigation />
     </NavigationContainer>
   );
 }
