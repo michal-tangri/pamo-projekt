@@ -1,0 +1,30 @@
+{
+  "characters": [
+    {
+      "name": "Gnol",
+      "level": 1,
+      "armor": 10,
+      "stats": {
+        "strength": 10,
+        "dexterity": 10,
+        "constitution": 10,
+        "intelligence": 10,
+        "wisdom": 10,
+        "charisma": 10
+      }
+    },
+    {
+      "name": "Trol",
+      "level": 2,
+      "armor": 13,
+      "stats": {
+        "strength": 21,
+        "dexterity": 7,
+        "constitution": 16,
+        "intelligence": 5,
+        "wisdom": 12,
+        "charisma": 13
+      }
+    }
+  ]
+}

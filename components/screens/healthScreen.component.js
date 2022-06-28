@@ -1,12 +1,15 @@
 import React from 'react';
-import { SafeAreaView, ScrollView, StatusBar, StyleSheet, Text, View, Button } from 'react-native';
+import { SafeAreaView, ScrollView, StatusBar, StyleSheet, Text, View, Button, TextInput } from 'react-native';
+import { saveCharacter } from '../storage';
 
 export class HealthScreen extends React.Component {
   constructor() {
     super();
     this.state = {
+      name: '',
+      level: 1,
+      armor: 0,
       stats: [
-        { key: 'healthPoints', label: 'HP', value: 0 },
         { key: 'strength', label: 'STR', value: 0 },
         { key: 'dexterity', label: 'DEX', value: 0 },
         { key: 'constitution', label: 'CON', value: 0 },
@@ -26,12 +29,44 @@ export class HealthScreen extends React.Component {
     this.setState({ [statName]: matchingStat.value -= amount });
   }
 
+  updateName = (name) => {
+    this.setState({ name: name });
+  }
+
+  updateLevel = (level = 1) => {
+    this.setState({ level: level });
+  }
+
+  updateArmor = (armor = 10) => {
+    this.setState({ armor: armor });
+  }
+
+  buildCharacterObject = () => {
+    let object = {};
+    object.name = this.state.name;
+    object.level = this.state.level;
+    object.armor = this.state.armor;
+    let stats = {};
+    this.state.stats.forEach(stat => {
+      stats[stat.key] = stat.value;
+    })
+    object.stats = stats;
+    return object;
+  }
+
   render() {
     return (
       <SafeAreaView>
         <StatusBar />
         <ScrollView>
-
+          <View style={styles.centered}>
+            <Text style={styles.largeText}>Character creation</Text>
+          </View>
+          <View >
+            <TextInput onChangeText={this.updateName} placeholder="Name..." style={styles.statsText} />
+            <TextInput onChangeText={this.updateLevel} placeholder="Level..." style={styles.statsText} />
+            <TextInput onChangeText={this.updateArmor} placeholder="Armor class..." style={styles.statsText} />
+          </View>
           {this.state.stats.map((stat) => (
             <View style={styles.row}>
               <View style={styles.statsBackground}>
@@ -52,6 +87,7 @@ export class HealthScreen extends React.Component {
             </View>
           ))}
           <View style={{ marginTop: 30 }}>
+            <Button title="Save" onPress={() => saveCharacter(this.buildCharacterObject())} />
             <Button title="Go back" onPress={() => this.props.navigation.goBack()} />
           </View>
         </ScrollView>
@@ -67,11 +103,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   largeText: {
-    fontSize: 48,
+    fontSize: 36,
     color: '#000',
   },
   statsText: {
-    fontSize: 36,
+    fontSize: 24,
     color: '#000',
   },
   statsBackground: {
@@ -90,23 +126,3 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
-
-// render() {
-//   return (
-//     <SafeAreaView>
-//       <StatusBar />
-//       <ScrollView>
-//         <View style={styles.centered}>
-//           <Text style={styles.largeText}>{this.state.healthPoints}</Text>
-//         </View>
-//         <View>
-//           <Button title="+" onPress={this.addHealthPoint} />
-//           <Button title="-" onPress={this.subtractHealthPoint} />
-//         </View>
-//         <View style={{ marginTop: 30 }}>
-//           <Button title="Go back" onPress={() => this.props.navigation.goBack()} />
-//         </View>
-//       </ScrollView>
-//     </SafeAreaView>
-//   );
-// }

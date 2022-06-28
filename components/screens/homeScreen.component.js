@@ -1,12 +1,44 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { SafeAreaView, ScrollView, StatusBar, StyleSheet, Text, View, Button, TextInput } from 'react-native';
+import characterData from '../../characters.json'
 
 export class HomeScreen extends React.Component {
+  constructor(){
+    super();
+  }
+
   render() {
     return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Home Screen</Text>
-      </View>
+      <SafeAreaView>
+        <StatusBar />
+        <ScrollView>
+          {characterData.characters.map((character) => (
+            <View style={styles.mainArea}>
+              <View style={styles.singleCharacter}>
+                <Text>Name: {character.name}</Text>
+                <Text>Level: {character.level}</Text>
+                <Text>Armor class: {character.armor}</Text>
+              </View>
+            </View>
+          ))}
+        </ScrollView>
+      </SafeAreaView>
     );
   }
+
+
 }
+
+const styles = StyleSheet.create({
+  mainArea: {
+    borderStyle: 'solid',
+    borderColor: '#000',
+    borderWidth: 1,
+  },
+  singleCharacter: {
+    padding: 10,
+    marginHorizontal: 10,
+    marginVertical: 10,
+
+  }
+})
