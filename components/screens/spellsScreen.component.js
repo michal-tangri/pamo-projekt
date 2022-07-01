@@ -13,6 +13,11 @@ export class SpellsScreen extends React.Component {
     };
   }
 
+  resetSearch = () => {
+    this.setState({ selectedSpell: '' });
+    this.setState({ spellNames: [...Object.keys(spellsData)] });
+  };
+
   search = (text) => {
     const filteredSpellNames = [...Object.keys(spellsData)].filter((spellName) => {
       return spellName.toLowerCase().includes(text.toLowerCase());
@@ -26,7 +31,7 @@ export class SpellsScreen extends React.Component {
       return (
         <ScrollView>
           <SpellComponent spellName={this.state.selectedSpell} />
-          <TouchableOpacity style={styles.goBackButton} onPress={() => this.setState({ selectedSpell: '' })}>
+          <TouchableOpacity style={styles.goBackButton} onPress={this.resetSearch}>
             <Text style={styles.whiteCenteredText}>Go back</Text>
           </TouchableOpacity>
         </ScrollView>
