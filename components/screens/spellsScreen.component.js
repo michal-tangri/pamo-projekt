@@ -4,20 +4,53 @@ import { Text, ScrollView, StyleSheet, TouchableOpacity, TextInput } from 'react
 import { SpellComponent } from '../spell.component';
 import * as spellsData from '../../data/spells';
 
+/**
+ * Screen (component) to display a list of spells with a search bar to allow
+ * easy filtering. After clicking one of the spells, it shows it's description
+ * and other useful information about it.
+ *
+ * @version 1.0.1
+ * @author Michał Tangri - 18505
+ * @see SpellComponent
+ */
 export class SpellsScreen extends React.Component {
   constructor() {
     super();
+    /**
+     * This class' state.
+     *
+     * Modified when a spell is selected from the list.
+     * Modified when value of search bar text input changes.
+     *
+     * @type {object}
+     * @property {string}   selectedSpell Name of a spell to display additional information, or empty string.
+     * @property {string[]} spellNames List of spell names to display the list.
+     * */
     this.state = {
       selectedSpell: '',
       spellNames: [...Object.keys(spellsData)],
     };
   }
 
+  /**
+   * Method used to reset the list of spell names after filtration has been applied.
+   * and to reset the selected spell to 'go back' to the list of spells.
+   *
+   * Called when 'go back' button is pressed.
+   * @public
+   * */
   resetSearch = () => {
-    this.setState({ selectedSpell: '' });
-    this.setState({ spellNames: [...Object.keys(spellsData)] });
+    this.setState({ selectedSpell: '', spellNames: [...Object.keys(spellsData)] });
   };
 
+  /**
+   * Method used to filter through the list of spells using a string provided
+   * in the search bar.
+   *
+   * Used whenever the value of the search bar changes.
+   * @param {string} text Current value of the search bar text input.
+   * @public
+   * */
   search = (text) => {
     const filteredSpellNames = [...Object.keys(spellsData)].filter((spellName) => {
       return spellName.toLowerCase().includes(text.toLowerCase());

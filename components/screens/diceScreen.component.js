@@ -2,15 +2,39 @@ import React from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { SafeAreaView, StatusBar, StyleSheet, Text, View, TouchableOpacity, Animated } from 'react-native';
 
+/**
+ * Dice rolling screen (component) that allows users to roll a die of choice.
+ * There are 7 dice they can select from and roll one at a time.
+ *
+ * @version 1.0.3
+ * @author Michał Tangri - 18505
+ */
 export class DiceScreen extends React.Component {
   constructor() {
     super();
-
+    /**
+     * This class' state.
+     *
+     * Modified when a die is selected.
+     * Modified when a die is rolled.
+     *
+     * @type {object}
+     * @property {string}   selectedDiceValue Value of the selected die used to generate random number - <1, selectedDiceValue>.
+     * @property {string[]} rolledValue Value of the previous die roll, or null.
+     * */
     this.state = {
       selectedDiceValue: 6,
       rolledValue: null,
     };
 
+    /**
+     * Data used to display a list of available dice.
+     *
+     * @type {object[]}
+     * @property {string} key Key by with the dice are identified.
+     * @property {string} label Label for each dice to be displayed in the list.
+     * @property {number} value Value used as the top boundary when generating a random number that is the result of a die roll.
+     * */
     this.diceData = [
       { key: 'd4', label: 'D4', value: 4 },
       { key: 'd6', label: 'D6', value: 6 },
@@ -21,10 +45,22 @@ export class DiceScreen extends React.Component {
       { key: 'd100', label: 'D100', value: 100 },
     ];
 
+    /**
+     * Instance of the Animated object.
+     *
+     * @type {object}
+     * @see https://reactnative.dev/docs/animated
+     * */
     this.diceAnimation = new Animated.Value(1);
     this.setupDiceAnimation();
   }
 
+  /**
+   * Method used initialize dice animation.
+   *
+   * Called during object's construction.
+   * @public
+   * */
   setupDiceAnimation() {
     const rotateInterpolate = this.diceAnimation.interpolate({
       inputRange: [0, 1],
@@ -34,10 +70,26 @@ export class DiceScreen extends React.Component {
     styles.diceAnimation = { transform: [{ rotate: rotateInterpolate }] };
   }
 
+  /**
+   * Method used to change the selected die.
+   *
+   * Called whenever a die button is pressed.
+   * @param {number} value Value of the new selected dice.
+   * @public
+   * @see diceData
+   * */
   changeSelectedDiceValue = (value) => {
     this.setState({ selectedDiceValue: value });
   };
 
+  /**
+   * Method used fire die animation and then reset it's state. It also rolls a die
+   * by generating a pseudo-random number using the top boundary from the state
+   *
+   * Used whenever a die is rolled.
+   * @see state.selectedDiceValue
+   * @public
+   * */
   rollDice = () => {
     Animated.timing(this.diceAnimation, {
       toValue: 0,

@@ -9,6 +9,33 @@ import { HealthScreen } from './screens/healthScreen.component';
 import { DiceScreen } from './screens/diceScreen.component';
 import { SpellsScreen } from './screens/spellsScreen.component';
 
+/**
+ * Function for creating FontAwesome <Icon> component.
+ *
+ * Used in navigation bar to display some nice icons.
+ * @param {string} name Name of the icon (from the list of available ones).
+ * @param {number} size Size of the icon (both width and height).
+ * @param {string} color Color of the icon (from the list of available ones).
+ * @param {boolean} solid Whether to use a solid or hollow/transparent version of the icon.
+ *
+ * @author Michał Tangri - 18505
+ * @see https://github.com/oblador/react-native-vector-icons
+ * @see https://reactnative.dev/docs/colors
+ * */
+function getIconComponent(name, size = 25, color = 'crimson', solid = true) {
+  return <Icon name={name} size={size} color={color} solid={solid} />;
+}
+
+/**
+ * Navigation component that is automatically pasted into all the screens.
+ *
+ * Allows users to switch between different screens using a bar at the bottom
+ * of the screen.
+ *
+ * @version 1.2.0
+ * @author Michał Tangri - 18505
+ * @see https://reactnavigation.org/docs/bottom-tab-navigator/
+ */
 export class Navigation extends React.Component {
   constructor() {
     super();
@@ -41,8 +68,4 @@ export class Navigation extends React.Component {
       </this.Tab.Navigator>
     );
   }
-}
-
-function getIconComponent(name, size = 25, color = 'crimson', solid = true) {
-  return <Icon name={name} size={size} color={color} solid={solid} />;
 }
