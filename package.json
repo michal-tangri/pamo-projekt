@@ -1,6 +1,6 @@
 {
   "name": "dndhelperreact",
-  "version": "0.0.1",
+  "version": "1.4.3",
   "private": true,
   "scripts": {
     "android": "react-native run-android",
