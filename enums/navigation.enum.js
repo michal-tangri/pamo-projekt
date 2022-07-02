@@ -1,6 +1,6 @@
 const Nagivation = {
   Home: 'Home',
-  Health: 'Health',
+  Stats: 'Stats',
   Dice: 'Dice',
   Spells: 'Spells',
 };
