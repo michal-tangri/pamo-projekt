@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 import { default as NavigationEnum } from '../enums/navigation.enum';
 
 import { HomeScreen } from './screens/homeScreen.component';
-import { HealthScreen } from './screens/healthScreen.component';
+import { StatScreen } from './screens/statScreen.component';
 import { DiceScreen } from './screens/diceScreen.component';
 import { SpellsScreen } from './screens/spellsScreen.component';
 
@@ -51,9 +51,9 @@ export class Navigation extends React.Component {
           options={{ header: () => null, tabBarIcon: () => getIconComponent('home') }}
         />
         <this.Tab.Screen
-          name={NavigationEnum.Health}
-          component={HealthScreen}
-          options={{ header: () => null, tabBarIcon: () => getIconComponent('heart') }}
+          name={NavigationEnum.Stats}
+          component={StatScreen}
+          options={{ header: () => null, tabBarIcon: () => getIconComponent('chart-pie') }}
         />
         <this.Tab.Screen
           name={NavigationEnum.Dice}
