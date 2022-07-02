@@ -7,6 +7,7 @@ import { default as NavigationEnum } from '../enums/navigation.enum';
 import { HomeScreen } from './screens/homeScreen.component';
 import { HealthScreen } from './screens/healthScreen.component';
 import { DiceScreen } from './screens/diceScreen.component';
+import { SpellsScreen } from './screens/spellsScreen.component';
 
 export class Navigation extends React.Component {
   constructor() {
@@ -31,6 +32,11 @@ export class Navigation extends React.Component {
           name={NavigationEnum.Dice}
           options={{ header: () => null, tabBarIcon: () => getIconComponent('dice') }}
           component={DiceScreen}
+        />
+        <this.Tab.Screen
+          name={NavigationEnum.Spells}
+          options={{ header: () => null, tabBarIcon: () => getIconComponent('fire') }}
+          component={SpellsScreen}
         />
       </this.Tab.Navigator>
     );
