@@ -18,6 +18,7 @@ export class HomeScreen extends React.Component {
     }
   }
 
+  /* This method loads character data into this screens' state */
   loadCharacterData = async () => {
     const characerData = await readSaveFile();
     this.setState({ characterData: characerData });
@@ -28,6 +29,7 @@ export class HomeScreen extends React.Component {
     await createSaveFile();
   }
 
+  /* This method ensures that the methods inside of it are called before the component renders */
   componentDidMount() {
     this.createFile();
     this.loadCharacterData();
